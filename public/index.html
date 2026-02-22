@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PPY — ppy.kr · The Suffix of Pop &amp; Positivity</title>
+<meta name="description" content="ppy.kr — The domain of pop, positivity, and playful energy. Explore the lively suffix that bounces through English from happy to zippy." />
+<meta property="og:title" content="PPY — ppy.kr · The Suffix of Pop &amp; Positivity" />
+<meta property="og:description" content="ppy.kr — Where energy meets expression. The suffix ‑ppy crackles through English with irresistible vitality." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style type="text/tailwindcss">
+  @theme {
+    --color-spark:   #f0d020;
+    --color-pop:     #f06040;
+    --color-bounce:  #2888e8;
+    --color-mint:    #28c880;
+    --color-void:    #040608;
+
+    --font-display:  'Fredoka One', cursive;
+    --font-rounded:  'Nunito', sans-serif;
+    --font-body:     'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #040608;
+    color: #f4f0fc;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── canvas ── */
+  #ppy-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── vignette ── */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+      transparent 38%,
+      rgba(4,6,8,.78) 100%);
+  }
+
+  /* ── pop overlay ── */
+  .pop-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 38% at 18% 25%, rgba(240,208,32,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 48% 32% at 82% 72%, rgba(40,136,232,.07) 0%, transparent 70%);
+  }
+
+  /* ── layout ── */
+  .page-content { position: relative; z-index: 2; }
+
+  /* ── header ── */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(4,6,8,.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(240,208,32,.18);
+  }
+
+  /* ── hero bg text ── */
+  .hero-bg-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(11rem, 27vw, 25rem);
+    font-weight: 900;
+    letter-spacing: .1em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(240,208,32,.08);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ── pop ring ── */
+  .pop-ring {
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(240,208,32,.16);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: popPulse 6s ease-in-out infinite;
+  }
+  .pop-ring::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(240,96,64,.12);
+    animation: popPulse 6s ease-in-out infinite reverse;
+  }
+  .pop-ring::after {
+    content: '';
+    position: absolute;
+    inset: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(40,200,128,.10);
+    animation: popPulse 8s ease-in-out infinite 1s;
+  }
+  @keyframes popPulse {
+    0%,100% { transform: translate(-50%,-50%) scale(1);    opacity:.9; }
+    50%      { transform: translate(-50%,-50%) scale(1.07); opacity:.4; }
+  }
+
+  /* ── suffix display ── */
+  .suffix-display {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(5rem, 16vw, 13rem);
+    line-height: .88;
+    background: linear-gradient(135deg, #f0d020 0%, #f06040 50%, #2888e8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: .04em;
+  }
+
+  /* ── pill ── */
+  .word-pill {
+    display: inline-block;
+    padding: .25rem .88rem;
+    border-radius: 9999px;
+    font-size: .78rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    border: 1px solid rgba(240,208,32,.28);
+    background: rgba(240,208,32,.08);
+    color: #f0d020;
+    transition: all .22s;
+    cursor: default;
+  }
+  .word-pill:hover {
+    background: rgba(240,208,32,.22);
+    border-color: rgba(240,208,32,.6);
+    transform: translateY(-3px) scale(1.04);
+  }
+
+  /* ── stat card ── */
+  .stat-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(240,208,32,.14);
+    border-radius: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    text-align: center;
+    transition: all .28s;
+  }
+  .stat-card:hover {
+    background: rgba(240,208,32,.06);
+    border-color: rgba(240,208,32,.35);
+    transform: translateY(-4px);
+  }
+
+  /* ── energy card ── */
+  .energy-card {
+    background: rgba(255,255,255,.025);
+    border-radius: 1.6rem;
+    padding: 2.2rem;
+    border: 1px solid rgba(255,255,255,.06);
+    transition: all .32s;
+  }
+  .energy-card:hover {
+    background: rgba(255,255,255,.05);
+    transform: translateY(-5px);
+  }
+
+  /* ── feat card ── */
+  .feat-card {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 1.2rem;
+    padding: 1.8rem;
+    transition: all .28s;
+  }
+  .feat-card:hover {
+    background: rgba(255,255,255,.05);
+    border-color: rgba(240,208,32,.28);
+    transform: translateY(-3px);
+  }
+
+  /* ── timeline ── */
+  .timeline-step {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline-step::before {
+    content: '';
+    position: absolute;
+    left: 0; top: .55rem;
+    width: .65rem; height: .65rem;
+    border-radius: 50%;
+    background: #f0d020;
+    box-shadow: 0 0 10px rgba(240,208,32,.7);
+  }
+  .timeline-step::after {
+    content: '';
+    position: absolute;
+    left: .3rem; top: 1.4rem;
+    width: 1px;
+    height: calc(100% + .5rem);
+    background: rgba(240,208,32,.18);
+  }
+  .timeline-step:last-child::after { display: none; }
+
+  /* ── gallery item ── */
+  .gallery-item {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 1rem;
+    padding: 1.1rem 1.3rem;
+    transition: all .26s;
+    cursor: default;
+  }
+  .gallery-item:hover {
+    background: rgba(240,208,32,.09);
+    border-color: rgba(240,208,32,.28);
+    transform: translateY(-3px);
+  }
+
+  /* ── codex ── */
+  .codex-box {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(240,208,32,.20);
+    border-radius: 1.6rem;
+    padding: 2.4rem;
+  }
+  .codex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: .68rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    gap: 1rem;
+  }
+  .codex-row:last-child { border-bottom: none; }
+
+  /* ── series ── */
+  .series-card {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 1rem;
+    padding: 1.1rem 1.4rem;
+    text-align: center;
+    transition: all .26s;
+    text-decoration: none;
+    display: block;
+  }
+  .series-card:hover {
+    background: rgba(255,255,255,.055);
+    border-color: rgba(240,208,32,.3);
+    transform: translateY(-2px);
+  }
+  .series-card.active {
+    background: rgba(240,208,32,.14);
+    border-color: rgba(240,208,32,.55);
+  }
+
+  /* ── fade-up ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── buttons ── */
+  .btn-primary {
+    display: inline-block;
+    padding: .88rem 2.3rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #f0d020, #f06040);
+    color: #040608;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    font-size: .95rem;
+    letter-spacing: .04em;
+    text-decoration: none;
+    transition: all .26s;
+    box-shadow: 0 4px 28px rgba(240,208,32,.32);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 36px rgba(240,208,32,.48);
+  }
+  .btn-outline {
+    display: inline-block;
+    padding: .88rem 2.3rem;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(240,208,32,.45);
+    color: #f0d020;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    font-size: .95rem;
+    letter-spacing: .04em;
+    text-decoration: none;
+    transition: all .26s;
+  }
+  .btn-outline:hover {
+    background: rgba(240,208,32,.12);
+    border-color: #f0d020;
+    transform: translateY(-3px);
+  }
+
+  section { position: relative; }
+</style>
+</head>
+<body>
+
+<!-- Canvas + overlays -->
+<canvas id="ppy-canvas"></canvas>
+<div class="vignette"></div>
+<div class="pop-overlay"></div>
+
+<div class="page-content">
+
+<!-- ═══════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header class="site-header">
+  <div style="max-width:1280px;margin:0 auto;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:.9rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f0d020,#f06040);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:.95rem;color:#040608;letter-spacing:.02em;">P</div>
+      <span style="font-family:'Fredoka One',cursive;font-size:1.15rem;letter-spacing:.06em;color:#f4f0fc;">ppy.kr</span>
+      <span style="padding:.15rem .7rem;border-radius:9999px;background:rgba(240,208,32,.14);border:1px solid rgba(240,208,32,.38);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:#f0d020;text-transform:uppercase;font-family:'Nunito',sans-serif;">Suffix Domain</span>
+    </div>
+    <nav style="display:flex;gap:2rem;align-items:center;">
+      <a href="#identity" style="font-size:.85rem;color:rgba(244,240,252,.55);text-decoration:none;letter-spacing:.04em;font-family:'Nunito',sans-serif;font-weight:600;transition:color .2s;" onmouseover="this.style.color='#f0d020'" onmouseout="this.style.color='rgba(244,240,252,.55)'">Identity</a>
+      <a href="#words"    style="font-size:.85rem;color:rgba(244,240,252,.55);text-decoration:none;letter-spacing:.04em;font-family:'Nunito',sans-serif;font-weight:600;transition:color .2s;" onmouseover="this.style.color='#f0d020'" onmouseout="this.style.color='rgba(244,240,252,.55)'">Words</a>
+      <a href="#origins"  style="font-size:.85rem;color:rgba(244,240,252,.55);text-decoration:none;letter-spacing:.04em;font-family:'Nunito',sans-serif;font-weight:600;transition:color .2s;" onmouseover="this.style.color='#f0d020'" onmouseout="this.style.color='rgba(244,240,252,.55)'">Origins</a>
+      <a href="#contact"  class="btn-primary" style="padding:.45rem 1.35rem;font-size:.82rem;">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden;">
+  <div class="hero-bg-text">PPY</div>
+  <div class="pop-ring"></div>
+
+  <div style="max-width:880px;text-align:center;position:relative;">
+
+    <!-- badge -->
+    <div style="display:inline-flex;align-items:center;gap:.6rem;padding:.4rem 1.2rem;border-radius:9999px;background:rgba(240,208,32,.11);border:1px solid rgba(240,208,32,.32);margin-bottom:2rem;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#f0d020;box-shadow:0 0 10px rgba(240,208,32,.8);display:inline-block;animation:blink 1.8s ease-in-out infinite;"></span>
+      <span style="font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:#f0d020;font-weight:700;font-family:'Nunito',sans-serif;">Suffix Domain</span>
+    </div>
+
+    <style>@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}</style>
+
+    <!-- suffix -->
+    <div class="suffix-display" style="margin-bottom:.7rem;">‑ppy</div>
+
+    <!-- origin line -->
+    <p style="font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:600;color:rgba(244,240,252,.5);letter-spacing:.08em;margin-bottom:2rem;">
+      Old Norse <em>happ</em> · Middle English <em>hap</em> + ‑y · Geminate Consonant
+    </p>
+
+    <!-- meaning -->
+    <p style="font-size:1.22rem;line-height:1.78;color:rgba(244,240,252,.82);max-width:660px;margin:0 auto 1.8rem;font-family:'Nunito',sans-serif;font-weight:400;">
+      The suffix that <strong style="color:#f0d020;">sparks with energy</strong> — from the warm glow of 
+      <em>happy</em> to the electric snap of <em>zippy</em>, the bounce of <em>peppy</em>, 
+      and the satisfying crack of <em>snappy</em>. In just three letters, ‑ppy captures 
+      life at its most vivid and alive.
+    </p>
+
+    <!-- quote -->
+    <blockquote style="font-family:'Nunito',sans-serif;font-size:1.08rem;font-style:italic;font-weight:600;color:#f06040;margin-bottom:2.2rem;padding:.8rem 1.6rem;border-left:2px solid rgba(240,96,64,.4);">
+      "No other suffix in English bounces quite like ‑ppy — two pops and a bright vowel, every time."
+    </blockquote>
+
+    <!-- pills -->
+    <div style="display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-bottom:2.8rem;">
+      <span class="word-pill">happy</span>
+      <span class="word-pill">snappy</span>
+      <span class="word-pill">zippy</span>
+      <span class="word-pill">peppy</span>
+      <span class="word-pill">chirpy</span>
+      <span class="word-pill">flappy</span>
+      <span class="word-pill">slappy</span>
+      <span class="word-pill">scrappy</span>
+      <span class="word-pill">choppy</span>
+      <span class="word-pill">sloppy</span>
+      <span class="word-pill">floppy</span>
+      <span class="word-pill">yappy</span>
+      <span class="word-pill">zappy</span>
+      <span class="word-pill">nappy</span>
+      <span class="word-pill">sappy</span>
+    </div>
+
+    <!-- CTA -->
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#identity" class="btn-primary">Explore ‑ppy</a>
+      <a href="#words"    class="btn-outline">Word Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
+<section id="identity" style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;" class="fade-up">
+      <div class="stat-card">
+        <div style="font-family:'Fredoka One',cursive;font-size:2.5rem;background:linear-gradient(135deg,#f0d020,#f06040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">200+</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,240,252,.45);margin-top:.4rem;font-family:'Nunito',sans-serif;">‑ppy words in English</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-family:'Fredoka One',cursive;font-size:2.5rem;background:linear-gradient(135deg,#f06040,#2888e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">pp</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,240,252,.45);margin-top:.4rem;font-family:'Nunito',sans-serif;">Geminate consonant</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-family:'Fredoka One',cursive;font-size:2.5rem;background:linear-gradient(135deg,#2888e8,#28c880);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ON</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,240,252,.45);margin-top:.4rem;font-family:'Nunito',sans-serif;">Old Norse root</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-family:'Fredoka One',cursive;font-size:2.5rem;background:linear-gradient(135deg,#28c880,#f0d020);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">⚡</div>
+        <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,240,252,.45);margin-top:.4rem;font-family:'Nunito',sans-serif;">Phonaesthetic power</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     THREE ENERGIES  (Emotion / Action / Sound)
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Semantic Identity</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">Three Energies of ‑ppy</h2>
+      <p style="font-size:1rem;color:rgba(244,240,252,.55);margin-top:.8rem;max-width:540px;margin-left:auto;margin-right:auto;font-family:'Nunito',sans-serif;">The ‑ppy cluster channels human energy into three distinct streams — emotional, kinetic, and sonic — each crackle with unmistakable vitality.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.8rem;">
+
+      <!-- Emotion -->
+      <div class="energy-card fade-up" style="border-top:3px solid #f0d020;">
+        <div style="font-size:2.8rem;margin-bottom:1rem;">😊</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#f0d020;margin-bottom:.5rem;font-weight:700;font-family:'Nunito',sans-serif;">Emotional State</div>
+        <h3 style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#f4f0fc;margin-bottom:.8rem;">Joy &amp; Feeling</h3>
+        <p style="font-size:.9rem;color:rgba(244,240,252,.65);line-height:1.72;margin-bottom:1.1rem;">The heart of ‑ppy is emotional: adjectives that describe inner states, moods, and qualities of character. The doubling of <em>p</em> intensifies the feeling, making it vivid and immediate.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+          <span class="word-pill">happy</span>
+          <span class="word-pill">sappy</span>
+          <span class="word-pill">soppy</span>
+          <span class="word-pill">peppy</span>
+          <span class="word-pill">stroppy</span>
+        </div>
+      </div>
+
+      <!-- Kinetic -->
+      <div class="energy-card fade-up" style="border-top:3px solid #f06040;">
+        <div style="font-size:2.8rem;margin-bottom:1rem;">⚡</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#f06040;margin-bottom:.5rem;font-weight:700;font-family:'Nunito',sans-serif;">Kinetic Quality</div>
+        <h3 style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#f4f0fc;margin-bottom:.8rem;">Speed &amp; Snap</h3>
+        <p style="font-size:.9rem;color:rgba(244,240,252,.65);line-height:1.72;margin-bottom:1.1rem;">‑ppy excels at capturing fast, sharp, bouncy movement. These adjectives describe things that move with energy and alertness — quick to act, quick to respond.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+          <span class="word-pill" style="border-color:rgba(240,96,64,.3);background:rgba(240,96,64,.08);color:#f06040;">snappy</span>
+          <span class="word-pill" style="border-color:rgba(240,96,64,.3);background:rgba(240,96,64,.08);color:#f06040;">zippy</span>
+          <span class="word-pill" style="border-color:rgba(240,96,64,.3);background:rgba(240,96,64,.08);color:#f06040;">scrappy</span>
+          <span class="word-pill" style="border-color:rgba(240,96,64,.3);background:rgba(240,96,64,.08);color:#f06040;">nippy</span>
+          <span class="word-pill" style="border-color:rgba(240,96,64,.3);background:rgba(240,96,64,.08);color:#f06040;">skippy</span>
+        </div>
+      </div>
+
+      <!-- Sonic -->
+      <div class="energy-card fade-up" style="border-top:3px solid #2888e8;">
+        <div style="font-size:2.8rem;margin-bottom:1rem;">🔊</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#2888e8;margin-bottom:.5rem;font-weight:700;font-family:'Nunito',sans-serif;">Sonic &amp; Tactile</div>
+        <h3 style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#f4f0fc;margin-bottom:.8rem;">Texture &amp; Sound</h3>
+        <p style="font-size:.9rem;color:rgba(244,240,252,.65);line-height:1.72;margin-bottom:1.1rem;">Some ‑ppy words capture physical texture and sound directly. The stop-consonant double‑p is itself a sonic event — the word performs its meaning in the act of being spoken.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+          <span class="word-pill" style="border-color:rgba(40,136,232,.3);background:rgba(40,136,232,.08);color:#60a8f8;">choppy</span>
+          <span class="word-pill" style="border-color:rgba(40,136,232,.3);background:rgba(40,136,232,.08);color:#60a8f8;">floppy</span>
+          <span class="word-pill" style="border-color:rgba(40,136,232,.3);background:rgba(40,136,232,.08);color:#60a8f8;">sloppy</span>
+          <span class="word-pill" style="border-color:rgba(40,136,232,.3);background:rgba(40,136,232,.08);color:#60a8f8;">flappy</span>
+          <span class="word-pill" style="border-color:rgba(40,136,232,.3);background:rgba(40,136,232,.08);color:#60a8f8;">clappy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     P · P · Y  LETTERS GRID
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Phonetic Anatomy</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">The Letters of ‑ppy</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;" class="fade-up">
+      <div style="text-align:center;padding:2.5rem 1.5rem;background:rgba(240,208,32,.06);border:1px solid rgba(240,208,32,.18);border-radius:1.6rem;">
+        <div style="font-family:'Fredoka One',cursive;font-size:4.5rem;color:#f0d020;line-height:1;margin-bottom:1rem;">P</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,240,252,.38);margin-bottom:.6rem;font-family:'Nunito',sans-serif;font-weight:700;">Pop</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.62);line-height:1.65;font-family:'Nunito',sans-serif;">The bilabial stop — both lips come together and burst open. The first P initiates the energy, placing the word firmly in the mouth before releasing it into the world.</p>
+      </div>
+      <div style="text-align:center;padding:2.5rem 1.5rem;background:rgba(240,96,64,.06);border:1px solid rgba(240,96,64,.18);border-radius:1.6rem;">
+        <div style="font-family:'Fredoka One',cursive;font-size:4.5rem;color:#f06040;line-height:1;margin-bottom:1rem;">P</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,240,252,.38);margin-bottom:.6rem;font-family:'Nunito',sans-serif;font-weight:700;">Power</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.62);line-height:1.65;font-family:'Nunito',sans-serif;">The geminate (doubled) P is the defining orthographic signature of this suffix. It enforces a short vowel before it and doubles the percussive impact — giving ‑ppy words their characteristic punch.</p>
+      </div>
+      <div style="text-align:center;padding:2.5rem 1.5rem;background:rgba(40,200,128,.06);border:1px solid rgba(40,200,128,.18);border-radius:1.6rem;">
+        <div style="font-family:'Fredoka One',cursive;font-size:4.5rem;color:#28c880;line-height:1;margin-bottom:1rem;">Y</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,240,252,.38);margin-bottom:.6rem;font-family:'Nunito',sans-serif;font-weight:700;">Yes</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.62);line-height:1.65;font-family:'Nunito',sans-serif;">The final ‑y is the adjective-forming suffix at work: it transforms a noun or root into a descriptor. Its bright, open vowel sound gives ‑ppy words their airy, upbeat resolution after the double-pop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FEATURE CARDS
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Linguistic Features</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">What Makes ‑ppy Unique</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem;" class="fade-up">
+      <div class="feat-card">
+        <div style="font-size:1.9rem;margin-bottom:1rem;">💥</div>
+        <h3 style="font-family:'Fredoka One',cursive;font-size:1.25rem;color:#f4f0fc;margin-bottom:.65rem;">Plosive Phonaesthesia</h3>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.68;font-family:'Nunito',sans-serif;">The ‑ppy cluster is uniquely plosive — both P sounds are bilabial stops, creating a double-burst effect that linguists call an expressive or phonaesthetic pattern. The word physically enacts its own energy as it's spoken.</p>
+      </div>
+      <div class="feat-card">
+        <div style="font-size:1.9rem;margin-bottom:1rem;">🔡</div>
+        <h3 style="font-family:'Fredoka One',cursive;font-size:1.25rem;color:#f4f0fc;margin-bottom:.65rem;">Gemination Rule</h3>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.68;font-family:'Nunito',sans-serif;">The doubled consonant in ‑ppy obeys English's short-vowel rule: a single consonant before ‑y would signal a long vowel (as in <em>cape → capy</em>), so doubling the P ensures the preceding vowel stays short and snappy.</p>
+      </div>
+      <div class="feat-card">
+        <div style="font-size:1.9rem;margin-bottom:1rem;">🎨</div>
+        <h3 style="font-family:'Fredoka One',cursive;font-size:1.25rem;color:#f4f0fc;margin-bottom:.65rem;">Colloquial Vitality</h3>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.68;font-family:'Nunito',sans-serif;">‑ppy words are overwhelmingly informal and colloquial, resisting Latinate pomposity. They thrive in spoken language, slang, brand names, and everyday conversation — a suffix of the people, not the academy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ETYMOLOGY TIMELINE
+══════════════════════════════════════════ -->
+<section id="origins" style="padding:5rem 2rem;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Etymology</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">The Journey of ‑ppy</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2rem;" class="fade-up">
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#f0d020;margin-bottom:.3rem;font-family:'Nunito',sans-serif;font-weight:700;">Old Norse · pre-1000 CE</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:1.12rem;font-weight:700;color:#f0d020;margin-bottom:.3rem;font-style:italic;">happ — "good luck, fortune"</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.65;font-family:'Nunito',sans-serif;">Viking settlers brought <em>happ</em> (good luck) into the English language mix. The same root gave us <em>happen</em>, <em>perhaps</em>, and <em>mishap</em> — a whole family of chance and fortune words rooted in this single Norse syllable.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#f0d020;margin-bottom:.3rem;font-family:'Nunito',sans-serif;font-weight:700;">Middle English · 1100–1400 CE</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:1.12rem;font-weight:700;color:#f0d020;margin-bottom:.3rem;font-style:italic;">hap + ‑y → hapy → happy</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.65;font-family:'Nunito',sans-serif;">Middle English attached the adjective-forming suffix ‑y to <em>hap</em>. Scribes then doubled the P to mark the short preceding vowel, producing <em>happy</em> — and in doing so, inadvertently invented the ‑ppy pattern that would go on to generate hundreds of words.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#f0d020;margin-bottom:.3rem;font-family:'Nunito',sans-serif;font-weight:700;">Early Modern English · 1400–1700 CE</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:1.12rem;font-weight:700;color:#f0d020;margin-bottom:.3rem;font-style:italic;">Productive expansion</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.65;font-family:'Nunito',sans-serif;">By analogy with <em>happy</em>, speakers began generating ‑ppy adjectives from monosyllabic nouns and verbs. <em>Snappy</em> (from <em>snap</em>), <em>clappy</em>, <em>nappy</em> — the pattern became a recognised, productive template for vivid, informal description.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#f0d020;margin-bottom:.3rem;font-family:'Nunito',sans-serif;font-weight:700;">Modern English · 1700 CE → present</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:1.12rem;font-weight:700;color:#f0d020;margin-bottom:.3rem;font-style:italic;">Colloquial dominance</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.65;font-family:'Nunito',sans-serif;">‑ppy words proliferated in informal registers, slang, and brand naming. <em>Zippy</em>, <em>peppy</em>, <em>scrappy</em>, <em>stroppy</em> — each generation adds new ‑ppy words. The suffix is now a living, breathing engine of expressive English.</p>
+      </div>
+      <div class="timeline-step">
+        <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#f0d020;margin-bottom:.3rem;font-family:'Nunito',sans-serif;font-weight:700;">Digital Age · 2000 CE → present</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:1.12rem;font-weight:700;color:#f0d020;margin-bottom:.3rem;font-style:italic;">Brand &amp; internet culture</div>
+        <p style="font-size:.88rem;color:rgba(244,240,252,.6);line-height:1.65;font-family:'Nunito',sans-serif;">In the age of brand names, apps, and social media, ‑ppy's short, memorable, energetic phonetic profile makes it a premium naming element. From <em>Snappy</em> to <em>Happy</em>-branded products worldwide, the suffix has never been more commercially and culturally vital.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WORD GALLERY
+══════════════════════════════════════════ -->
+<section id="words" style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Word Gallery</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">‑ppy in Action</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:1rem;" class="fade-up">
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">happy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">feeling joy; ON <em>happ</em> + ‑y, ME</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">snappy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">brisk, sharp; <em>snap</em> + ‑py, 19c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">zippy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">fast, lively; <em>zip</em> + ‑py, 20c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">peppy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">energetic; <em>pep</em> + ‑py, Am.E 20c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">scrappy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">determined, combative; <em>scrap</em> + ‑py</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">choppy</div>
+        <div style="font-size:.72rem;color:#60a8f8;opacity:.9;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">rough, irregular; <em>chop</em> + ‑py, 17c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">sloppy</div>
+        <div style="font-size:.72rem;color:#60a8f8;opacity:.9;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">wet, untidy; <em>slop</em> + ‑py, 17c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">floppy</div>
+        <div style="font-size:.72rem;color:#60a8f8;opacity:.9;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">limp, droopy; <em>flop</em> + ‑py, 19c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">sappy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">overly sentimental; <em>sap</em> + ‑py</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">crappy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">of poor quality; <em>crap</em> + ‑py, colloq.</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">yappy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">talkative, shrill; <em>yap</em> + ‑py, 20c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">nappy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">noun / adj</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">diaper (Brit.); <em>nap</em> + ‑py, 20c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">flappy</div>
+        <div style="font-size:.72rem;color:#60a8f8;opacity:.9;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">waving loosely; <em>flap</em> + ‑py</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">zappy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">exciting, punchy; <em>zap</em> + ‑py, inf.</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">stroppy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">belligerent (Brit.); origin uncertain, 20c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">soppy</div>
+        <div style="font-size:.72rem;color:#60a8f8;opacity:.9;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">wet, overly sentimental; <em>sop</em> + ‑py</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">nippy</div>
+        <div style="font-size:.72rem;color:#f06040;opacity:.8;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">cold, quick; <em>nip</em> + ‑py, 19c</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">unhappy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">not happy; <em>un‑</em> + <em>happy</em>, OE</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">gappy</div>
+        <div style="font-size:.72rem;color:#60a8f8;opacity:.9;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">having gaps; <em>gap</em> + ‑py, mod.</div>
+      </div>
+      <div class="gallery-item">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#f0d020;">slap-happy</div>
+        <div style="font-size:.72rem;color:#f0d020;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin:.2rem 0;font-family:'Nunito',sans-serif;font-weight:700;">adjective</div>
+        <div style="font-size:.83rem;color:rgba(244,240,252,.52);font-family:'Nunito',sans-serif;">dazed or recklessly cheerful, Am.E</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CODEX BOX
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Lexical Profile</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">Codex ‑ppy</h2>
+    </div>
+    <div class="codex-box fade-up">
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:2rem;padding-bottom:1.3rem;border-bottom:1px solid rgba(240,208,32,.18);">
+        <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#f0d020,#f06040);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1rem;color:#040608;">ppy</div>
+        <div>
+          <div style="font-family:'Fredoka One',cursive;font-size:1.15rem;color:#f4f0fc;letter-spacing:.05em;">SUFFIX PROFILE</div>
+          <div style="font-size:.75rem;color:rgba(244,240,252,.38);letter-spacing:.1em;font-family:'Nunito',sans-serif;">ppy.kr · Lexical Identity</div>
+        </div>
+      </div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Suffix</span><span style="font-family:'Fredoka One',cursive;font-size:1.05rem;color:#f0d020;">‑ppy</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Origin</span><span style="font-size:.9rem;color:#f4f0fc;text-align:right;max-width:60%;font-family:'Nunito',sans-serif;">Old Norse <em>happ</em> → Middle English <em>hap</em> + ‑y</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Function</span><span style="font-size:.9rem;color:#f4f0fc;text-align:right;font-family:'Nunito',sans-serif;">Adjective-forming (primary); Noun (rare)</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Orthography</span><span style="font-size:.9rem;color:#f4f0fc;font-family:'Nunito',sans-serif;">Geminate P (short-vowel marker) + ‑y</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Register</span><span style="font-size:.9rem;color:#f4f0fc;font-family:'Nunito',sans-serif;">Informal · colloquial · expressive</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Phonaesthesia</span><span style="font-size:.9rem;color:#f4f0fc;font-family:'Nunito',sans-serif;">Energy · pop · brightness · snap</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Productivity</span><span style="font-size:.9rem;color:#f4f0fc;font-family:'Nunito',sans-serif;">High in informal / colloquial English</span></div>
+      <div class="codex-row"><span style="font-size:.8rem;color:rgba(244,240,252,.42);letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif;font-weight:600;">Domain</span><span style="font-size:.9rem;color:#f0d020;font-weight:700;font-family:'Nunito',sans-serif;">ppy.kr</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SUFFIX SERIES
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;" class="fade-up">
+      <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:.8rem;font-family:'Nunito',sans-serif;font-weight:700;">Suffix Family</p>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:2.5rem;color:#f4f0fc;">The Suffix Series</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;" class="fade-up">
+      <a href="https://ous.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ous</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ous.kr</div></a>
+      <a href="https://ize.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ize</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ize.kr</div></a>
+      <a href="https://ive.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ive</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ive.kr</div></a>
+      <a href="https://ity.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ity</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ity.kr</div></a>
+      <a href="https://ify.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ify</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ify.kr</div></a>
+      <a href="https://ial.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ial</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ial.kr</div></a>
+      <a href="https://ful.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ful</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ful.kr</div></a>
+      <a href="https://ary.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ary</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ary.kr</div></a>
+      <a href="https://ble.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑ble</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">ble.kr</div></a>
+      <a href="https://rry.kr" class="series-card"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f4f0fc;margin-bottom:.3rem;">‑rry</div><div style="font-size:.72rem;color:rgba(244,240,252,.38);font-family:'Nunito',sans-serif;">rry.kr</div></a>
+      <a href="https://ppy.kr" class="series-card active"><div style="font-family:'Fredoka One',cursive;font-size:1.45rem;color:#f0d020;margin-bottom:.3rem;">‑ppy</div><div style="font-size:.72rem;color:#f0d020;font-weight:700;font-family:'Nunito',sans-serif;">ppy.kr</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ORIGIN NARRATIVE
+══════════════════════════════════════════ -->
+<section style="padding:6rem 2rem;">
+  <div style="max-width:800px;margin:0 auto;text-align:center;" class="fade-up">
+    <div style="font-size:4.5rem;margin-bottom:1.5rem;">⚡</div>
+    <p style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#f0d020;margin-bottom:1rem;font-family:'Nunito',sans-serif;font-weight:700;">Origin Story</p>
+    <h2 style="font-family:'Fredoka One',cursive;font-size:2.3rem;color:#f4f0fc;margin-bottom:1.8rem;">Born from a Viking's Good Luck</h2>
+    <p style="font-family:'Nunito',sans-serif;font-size:1.12rem;line-height:1.85;color:rgba(244,240,252,.78);font-weight:400;margin-bottom:1.5rem;">
+      A thousand years ago, Norse seafarers carried the word <strong style="color:#f0d020;"><em>happ</em></strong> — good luck, fortune — into English harbours. Scribes attached the adjective-forming ‑y, and the spelling rules of Middle English doubled the P to keep the vowel short. In doing so, they accidentally forged the most energetic suffix cluster in the language: ‑ppy.
+    </p>
+    <p style="font-family:'Nunito',sans-serif;font-size:1.12rem;line-height:1.85;color:rgba(244,240,252,.78);font-weight:400;margin-bottom:2.5rem;">
+      Today, ‑ppy is the suffix of <strong style="color:#f06040;">pop culture, positivity, and personality</strong>. It powers brand names, slang, and the everyday vocabulary of feeling alive. Whether you're <em>happy</em> or <em>snappy</em>, <em>zippy</em> or <em>scrappy</em>, the double-P double-fires the word into the world — and the world fires back.
+    </p>
+    <a href="#contact" class="btn-primary">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section id="contact" style="padding:6rem 2rem;">
+  <div style="max-width:680px;margin:0 auto;text-align:center;" class="fade-up">
+    <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,#f0d020,#f06040);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.7rem;">✉️</div>
+    <h2 style="font-family:'Fredoka One',cursive;font-size:2.3rem;color:#f4f0fc;margin-bottom:1rem;">Connect with ppy.kr</h2>
+    <p style="font-size:1rem;color:rgba(244,240,252,.6);line-height:1.72;margin-bottom:2.3rem;font-family:'Nunito',sans-serif;">
+      Interested in the ‑ppy domain, the suffix series project, or lexical identity for your own domain? Reach out — because being <em>happy</em> starts with making contact.
+    </p>
+    <a href="mailto:hello@ppy.kr" class="btn-primary" style="font-size:1rem;">hello@ppy.kr</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer style="border-top:1px solid rgba(240,208,32,.10);padding:2.5rem 2rem;text-align:center;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+    <div style="display:flex;align-items:center;gap:.7rem;">
+      <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#f0d020,#f06040);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:.75rem;color:#040608;">P</div>
+      <span style="font-family:'Fredoka One',cursive;font-size:.95rem;letter-spacing:.08em;color:rgba(244,240,252,.45);">ppy.kr</span>
+    </div>
+    <div style="font-size:.78rem;color:rgba(244,240,252,.28);letter-spacing:.06em;font-family:'Nunito',sans-serif;">The Suffix of Pop &amp; Positivity</div>
+    <div style="font-size:.78rem;color:rgba(244,240,252,.28);font-family:'Nunito',sans-serif;">© 2026 ppy.kr</div>
+  </div>
+</footer>
+
+</div><!-- /page-content -->
+
+<!-- ═══════════════════════════════════════
+     PARTICLE SYSTEM + SCROLL OBSERVER
+══════════════════════════════════════════ -->
+<script>
+(function () {
+  /* ── palette ── */
+  const C = {
+    spark:   '#f0d020',
+    pop:     '#f06040',
+    bounce:  '#2888e8',
+    mint:    '#28c880',
+    void:    '#040608'
+  };
+
+  /* ── canvas ── */
+  const canvas = document.getElementById('ppy-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initAll(); });
+
+  /* ══════════════════════════════
+     Layer 1 · SparkDot  (bright energy dots)
+  ══════════════════════════════ */
+  class SparkDot {
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.r  = Math.random() * 2.8 + 1;
+      this.vx = (Math.random() - .5) * .5;
+      this.vy = (Math.random() - .5) * .5;
+      const p = [C.spark, C.pop, C.bounce, C.mint];
+      this.col   = p[Math.floor(Math.random() * p.length)];
+      this.alpha = Math.random() * .5 + .1;
+      this.pulse = Math.random() * Math.PI * 2;
+      this.pspd  = Math.random() * .025 + .01;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.pulse += this.pspd;
+      if (this.x < 0) this.x = W;
+      if (this.x > W) this.x = 0;
+      if (this.y < 0) this.y = H;
+      if (this.y > H) this.y = 0;
+    }
+    draw() {
+      const a = this.alpha * (.65 + .35 * Math.sin(this.pulse));
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.col;
+      ctx.globalAlpha = a;
+      ctx.shadowColor = this.col;
+      ctx.shadowBlur  = 6;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  /* ══════════════════════════════
+     Layer 2 · PopWord  (floating -ppy words)
+  ══════════════════════════════ */
+  const PPY_WORDS = ['happy','snappy','zippy','peppy','scrappy','choppy',
+                     'sloppy','floppy','yappy','zappy','nippy','stroppy',
+                     'sappy','flappy','crappy','‑ppy','slap-happy','gappy'];
+
+  class PopWord {
+    reset() {
+      this.x     = Math.random() * W;
+      this.y     = H + 30;
+      this.vy    = -(Math.random() * .6 + .2);
+      this.vx    = (Math.random() - .5) * .25;
+      this.word  = PPY_WORDS[Math.floor(Math.random() * PPY_WORDS.length)];
+      this.size  = Math.random() * 10 + 9;
+      this.alpha = 0;
+      this.maxAlpha = Math.random() * .22 + .06;
+      const cols = [C.spark, C.pop, C.bounce, C.mint];
+      this.col = cols[Math.floor(Math.random() * cols.length)];
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.alpha < this.maxAlpha) this.alpha += .0022;
+      if (this.y < H * .28) this.alpha -= .0032;
+      if (this.alpha < 0 || this.y < -40) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.font = `700 ${this.size}px 'Nunito', sans-serif`;
+      ctx.fillStyle = this.col;
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.fillText(this.word, this.x, this.y);
+      ctx.restore();
+    }
+  }
+
+  /* ══════════════════════════════
+     Layer 3 · BounceArc  (bouncing arc trails)
+  ══════════════════════════════ */
+  class BounceArc {
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.r  = Math.random() * 50 + 15;
+      this.startA = Math.random() * Math.PI * 2;
+      this.endA   = this.startA + Math.random() * Math.PI * .8 + .3;
+      this.rot    = 0;
+      this.rotSpd = (Math.random() - .5) * .018;
+      this.alpha  = Math.random() * .14 + .04;
+      this.col    = Math.random() < .5 ? C.spark : C.pop;
+    }
+    update() {
+      this.rot += this.rotSpd;
+      this.alpha -= .0006;
+      if (this.alpha <= 0) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.beginPath();
+      ctx.arc(0, 0, this.r, this.startA, this.endA);
+      ctx.strokeStyle = this.col;
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.lineWidth   = 1.2;
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ══════════════════════════════
+     Layer 4 · PopRing  (expanding rings)
+  ══════════════════════════════ */
+  class PopRing {
+    reset() {
+      this.x    = Math.random() * W;
+      this.y    = Math.random() * H;
+      this.r    = Math.random() * 25 + 8;
+      this.maxR = Math.random() * 150 + 70;
+      this.spd  = Math.random() * .9 + .4;
+      this.alpha = Math.random() * .2 + .06;
+      const p = [C.spark, C.pop, C.bounce, C.mint];
+      this.col = p[Math.floor(Math.random() * p.length)];
+    }
+    update() {
+      this.r += this.spd;
+      this.alpha -= .0020;
+      if (this.alpha <= 0 || this.r > this.maxR) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.strokeStyle = this.col;
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ── pools ── */
+  let dots = [], words = [], arcs = [], rings = [];
+
+  function initAll() {
+    dots  = Array.from({ length: 70 }, () => { const d = new SparkDot();  d.reset(); d.y = Math.random() * H; return d; });
+    words = Array.from({ length: 30 }, () => { const w = new PopWord();   w.reset(); w.y = Math.random() * H; return w; });
+    arcs  = Array.from({ length: 20 }, () => { const a = new BounceArc(); a.reset(); return a; });
+    rings = Array.from({ length: 14 }, () => { const r = new PopRing();   r.reset(); r.r = Math.random() * r.maxR; return r; });
+  }
+  initAll();
+
+  /* ── loop ── */
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    rings.forEach(r => { r.update(); r.draw(); });
+    arcs.forEach(a  => { a.update(); a.draw(); });
+    dots.forEach(d  => { d.update(); d.draw(); });
+    words.forEach(w => { w.update(); w.draw(); });
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  /* ── IntersectionObserver ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+})();
+</script>
+
+</body>
+</html>
