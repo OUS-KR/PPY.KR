@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>‑ppy | ppy.kr – 영어 접미사 ‑ppy의 모든 것</title>
+<meta name="description" content="‑ppy: 상태·성질·감정을 나타내는 영어 형용사 접미사. happy, snappy, scrappy,appy… ppy.kr에서 어원과 파생어를 탐구하세요."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #020309;
+    --yellow: #facc15;
+    --gold:   #f59e0b;
+    --pink:   #f472b6;
+    --sky:    #38bdf8;
+    --lime:   #a3e635;
+    --coral:  #fb7185;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: #e2e8f0;
+    font-family: 'Inter', 'Noto Serif KR', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Background radial layers */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 72% 52% at 15% 20%, rgba(250,204,21,.09) 0%, transparent 62%),
+      radial-gradient(ellipse 58% 46% at 85% 78%, rgba(244,114,182,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 58% at 52% 50%, rgba(56,189,248,.04)  0%, transparent 68%);
+    pointer-events: none;
+  }
+
+  /* Top stripe */
+  .top-stripe {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 9999;
+    background: linear-gradient(90deg, var(--yellow), var(--pink), var(--sky), var(--lime), var(--coral), var(--yellow));
+    background-size: 300% 100%;
+    animation: stripe 4s linear infinite;
+  }
+  @keyframes stripe { 0%{background-position:0% 50%} 100%{background-position:300% 50%} }
+
+  /* Confetti-dot overlay */
+  .confetti-overlay {
+    position: fixed; inset: 0; z-index: 0; opacity: .018; pointer-events: none;
+    background-image:
+      radial-gradient(circle, rgba(250,204,21,.9) 1.5px, transparent 1.5px),
+      radial-gradient(circle, rgba(244,114,182,.7) 1px,   transparent 1px),
+      radial-gradient(circle, rgba(56,189,248,.6)  1px,   transparent 1px);
+    background-size: 60px 60px, 40px 40px, 80px 80px;
+    background-position: 0 0, 20px 20px, 10px 40px;
+  }
+
+  /* Particles */
+  #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  section, header, footer { position: relative; z-index: 1; }
+
+  /* Glass */
+  .glass {
+    background: rgba(255,255,255,.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+  }
+  .glass-strong {
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 20px;
+  }
+
+  /* Neon glow */
+  .neon-yellow { color: var(--yellow); text-shadow: 0 0 20px rgba(250,204,21,.7), 0 0 40px rgba(250,204,21,.3); }
+  .neon-pink   { color: var(--pink);   text-shadow: 0 0 20px rgba(244,114,182,.7), 0 0 40px rgba(244,114,182,.3); }
+  .neon-sky    { color: var(--sky);    text-shadow: 0 0 20px rgba(56,189,248,.7); }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* Avatar ring */
+  .avatar-ring {
+    width: 120px; height: 120px; border-radius: 50%; padding: 3px;
+    background: conic-gradient(var(--yellow), var(--pink), var(--sky), var(--lime), var(--coral), var(--yellow));
+    animation: spin 6s linear infinite;
+    margin: 0 auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Letter cards */
+  .letter-card {
+    width: 52px; height: 64px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2.1rem; font-weight: 700;
+    border-radius: 14px;
+    border: 2px solid rgba(250,204,21,.38);
+    background: rgba(250,204,21,.09);
+    color: var(--yellow);
+    text-shadow: 0 0 14px rgba(250,204,21,.9);
+    animation: lBounce 2.4s ease-in-out infinite;
+  }
+  .letter-card:nth-child(2) { animation-delay:.3s; border-color:rgba(244,114,182,.38); background:rgba(244,114,182,.09); color:var(--pink); text-shadow:0 0 14px rgba(244,114,182,.9); }
+  .letter-card:nth-child(3) { animation-delay:.6s; border-color:rgba(56,189,248,.38);  background:rgba(56,189,248,.09);  color:var(--sky);  text-shadow:0 0 14px rgba(56,189,248,.9); }
+  @keyframes lBounce { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-8px) rotate(2deg)} }
+
+  /* Joy meter */
+  .joy-meter { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+  .joy-seg {
+    width: 18px; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,.09); transition: background .3s;
+  }
+  .joy-seg.lit { background: var(--yellow); box-shadow: 0 0 6px rgba(250,204,21,.75); }
+  .joy-seg.lit:nth-child(3n+2) { background: var(--pink);  box-shadow: 0 0 6px rgba(244,114,182,.75); }
+  .joy-seg.lit:nth-child(3n)   { background: var(--sky);   box-shadow: 0 0 6px rgba(56,189,248,.75); }
+
+  /* KPI */
+  .kpi-card {
+    text-align: center; padding: 28px 20px; border-radius: 16px;
+    border: 1px solid rgba(250,204,21,.22);
+    background: linear-gradient(135deg, rgba(250,204,21,.08), rgba(244,114,182,.04));
+  }
+
+  /* Social */
+  .social-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 20px; border-radius: 14px;
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    color: #e2e8f0; text-decoration: none; font-weight: 500;
+    transition: all .25s ease;
+  }
+  .social-btn:hover { background: rgba(250,204,21,.12); border-color: rgba(250,204,21,.4); transform: translateX(6px); color: var(--yellow); }
+  .social-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Word pills */
+  .word-pill {
+    padding: 8px 18px; border-radius: 999px;
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: .88rem;
+    border: 1px solid rgba(250,204,21,.3); background: rgba(250,204,21,.08); color: var(--yellow);
+    transition: all .2s; cursor: default;
+  }
+  .word-pill:hover { background: rgba(250,204,21,.22); transform: scale(1.07) rotate(-1deg); box-shadow: 0 0 16px rgba(250,204,21,.35); }
+  .word-pill.b { border-color:rgba(244,114,182,.3); background:rgba(244,114,182,.08); color:var(--pink); }
+  .word-pill.b:hover { background:rgba(244,114,182,.22); box-shadow:0 0 16px rgba(244,114,182,.35); }
+  .word-pill.c { border-color:rgba(56,189,248,.3); background:rgba(56,189,248,.08); color:var(--sky); }
+  .word-pill.c:hover { background:rgba(56,189,248,.22); box-shadow:0 0 16px rgba(56,189,248,.35); }
+
+  /* Progress bars */
+  .prog-track { height: 8px; background: rgba(255,255,255,.08); border-radius: 999px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 999px; width: 0; transition: width 1.4s cubic-bezier(.4,0,.2,1); }
+
+  /* Accordion */
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .acc-body.open { max-height: 360px; }
+  .acc-arrow { transition: transform .3s ease; display: inline-block; }
+  .acc-arrow.open { transform: rotate(180deg); }
+
+  /* Carousel */
+  .carousel-track { display: flex; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+  .carousel-slide { min-width: 100%; position: relative; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); transition: all .3s; cursor: pointer; border: none; }
+  .carousel-dot.active { background: var(--yellow); width: 24px; border-radius: 4px; box-shadow: 0 0 8px rgba(250,204,21,.65); }
+
+  /* Music player */
+  .vinyl {
+    width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+    background: conic-gradient(#1a1600 0deg 30deg,#2d2500 30deg 60deg,#1a1600 60deg 90deg,#2d2500 90deg 120deg,#1a1600 120deg 150deg,#2d2500 150deg 180deg,#1a1600 180deg 210deg,#2d2500 210deg 240deg,#1a1600 240deg 270deg,#2d2500 270deg 300deg,#1a1600 300deg 330deg,#2d2500 330deg 360deg);
+    position: relative; border: 3px solid rgba(250,204,21,.4);
+  }
+  .vinyl::after { content:''; position:absolute; inset:30%; border-radius:50%; background:var(--yellow); box-shadow:0 0 12px rgba(250,204,21,.95); }
+  .vinyl.spinning { animation: vinylSpin 2s linear infinite; }
+  @keyframes vinylSpin { to { transform: rotate(360deg); } }
+  .music-prog-track { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; cursor: pointer; }
+  .music-prog-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--yellow), var(--pink)); transition: width .2s linear; }
+
+  /* Code block */
+  .code-block {
+    background: #100f02; border: 1px solid rgba(250,204,21,.18);
+    border-radius: 12px; overflow-x: auto; padding: 20px;
+    font-family: 'Fira Code','Consolas',monospace; font-size: .8rem; line-height: 1.75;
+  }
+  .tk-kw { color: #ff7b72; } .tk-fn { color: #ffd700; } .tk-st { color: #a5d6ff; }
+  .tk-nm { color: #7ee787; } .tk-cm { color: #8b949e; }
+
+  /* Timeline */
+  .tl-line { width: 2px; background: linear-gradient(180deg, var(--yellow), var(--pink), var(--sky), var(--lime), var(--coral)); border-radius: 2px; }
+  .tl-dot  { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--yellow); background: var(--bg); box-shadow: 0 0 8px rgba(250,204,21,.65); flex-shrink: 0; }
+
+  /* Announcement */
+  .announce-bar {
+    background: linear-gradient(90deg, rgba(250,204,21,.1), rgba(244,114,182,.1), rgba(56,189,248,.08));
+    border: 1px solid rgba(250,204,21,.24); border-radius: 14px;
+    padding: 16px 24px; display: flex; align-items: center; gap: 14px;
+  }
+  .announce-badge { padding: 4px 12px; border-radius: 999px; font-size: .7rem; font-weight: 700; background: var(--yellow); color: #1a1200; letter-spacing: .08em; white-space: nowrap; flex-shrink: 0; }
+
+  /* Project cards */
+  .project-card { padding: 22px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); transition: all .25s; }
+  .project-card:hover { background: rgba(250,204,21,.07); border-color: rgba(250,204,21,.3); transform: translateY(-4px); }
+  .status-badge { padding: 2px 10px; border-radius: 999px; font-size: .65rem; font-weight: 700; letter-spacing: .08em; }
+
+  /* Form inputs */
+  .form-input {
+    width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; padding: 12px 16px; color: #e2e8f0; font-size: .9rem;
+    transition: border-color .2s, box-shadow .2s; outline: none;
+  }
+  .form-input:focus { border-color: rgba(250,204,21,.5); box-shadow: 0 0 0 3px rgba(250,204,21,.1); }
+  .form-input::placeholder { color: rgba(255,255,255,.22); }
+
+  /* Transform row */
+  .transform-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 12px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    transition: all .2s;
+  }
+  .transform-row:hover { background: rgba(250,204,21,.07); border-color: rgba(250,204,21,.28); }
+
+  /* Mood card */
+  .mood-card {
+    padding: 18px; border-radius: 14px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    text-align: center; transition: all .25s;
+  }
+  .mood-card:hover { transform: translateY(-4px) rotate(1deg); }
+
+  /* Scroll top */
+  #scrollTop {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--yellow), var(--pink));
+    border: none; cursor: pointer; display: none; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: #1a1200; box-shadow: 0 4px 16px rgba(250,204,21,.5);
+    transition: transform .2s;
+  }
+  #scrollTop:hover { transform: scale(1.12) translateY(-2px); }
+
+  @media (max-width:640px) {
+    .letter-card { width: 44px; height: 56px; font-size: 1.7rem; }
+    .kpi-card { padding: 20px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+<div class="confetti-overlay"></div>
+<canvas id="particles"></canvas>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">☀️</button>
+
+<!-- ═══════════════════════════════════════════
+  1. HERO
+═══════════════════════════════════════════ -->
+<header class="min-h-screen flex flex-col items-center justify-center px-4 py-20 text-center">
+  <div class="max-w-2xl mx-auto w-full">
+
+    <!-- Avatar -->
+    <div class="avatar-ring mb-6">
+      <div class="avatar-inner">
+        <img src="https://api.dicebear.com/9.x/shapes/svg?seed=ppy&backgroundColor=facc15,f472b6,38bdf8&backgroundType=gradientLinear"
+             alt="ppy.kr avatar" style="width:100%;height:100%;border-radius:50%;"/>
+      </div>
+    </div>
+
+    <!-- Label -->
+    <p style="font-family:'Fredoka',sans-serif;font-size:clamp(.75rem,2.4vw,1rem);color:rgba(255,255,255,.45);letter-spacing:.28em;text-transform:uppercase;margin-bottom:8px;">English Suffix</p>
+
+    <!-- Title -->
+    <h1 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:clamp(4.2rem,13vw,7.8rem);font-weight:700;line-height:1;margin-bottom:4px;">‑ppy</h1>
+    <p style="font-size:clamp(.9rem,2.5vw,1.2rem);color:rgba(255,255,255,.48);letter-spacing:.12em;margin-bottom:28px;">ppy.kr</p>
+
+    <!-- Core meaning -->
+    <div class="glass-strong p-5 mb-8 text-left" style="border-color:rgba(250,204,21,.24);">
+      <p style="font-size:.68rem;color:var(--yellow);letter-spacing:.22em;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Core Meaning</p>
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 6px rgba(250,204,21,.9);flex-shrink:0;display:block;"></span>
+          <span style="font-size:.9rem;">명사·형용사 어근에 붙어 상태·성질을 나타내는 접미사</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 6px rgba(244,114,182,.9);flex-shrink:0;display:block;"></span>
+          <span style="font-size:.9rem;">"~한 상태인 / ~의 성질을 가진 / ~스러운 느낌의"</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--sky);box-shadow:0 0 6px rgba(56,189,248,.9);flex-shrink:0;display:block;"></span>
+          <span style="font-size:.9rem;">어근 + ‑py (p 중복 + ‑y) → ‑ppy 형용사 형성</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter cards -->
+    <div class="flex justify-center gap-3 mb-8">
+      <div class="letter-card">p</div>
+      <div class="letter-card">p</div>
+      <div class="letter-card">y</div>
+    </div>
+
+    <!-- Joy meter -->
+    <p style="font-size:.68rem;color:rgba(255,255,255,.32);letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px;">Joy Level</p>
+    <div class="joy-meter mb-2" id="joyMeter"></div>
+    <p style="font-size:.75rem;color:rgba(255,255,255,.28);">20 / 20 — MAX ☀️</p>
+
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+  2. KPI BOARD
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.6rem;font-weight:700;text-align:center;margin-bottom:32px;">‑ppy by the Numbers</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;">
+      <div class="kpi-card">
+        <p class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:2.5rem;font-weight:700;" id="kpi1">0</p>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.42);margin-top:6px;">‑ppy 파생 어휘 수</p>
+      </div>
+      <div class="kpi-card" style="border-color:rgba(244,114,182,.22);background:linear-gradient(135deg,rgba(244,114,182,.08),rgba(56,189,248,.04));">
+        <p class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:2.5rem;font-weight:700;" id="kpi2">0</p>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.42);margin-top:6px;">년 역사 (고대 영어~현재)</p>
+      </div>
+      <div class="kpi-card" style="border-color:rgba(56,189,248,.22);background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(163,230,53,.04));">
+        <p class="neon-sky" style="font-family:'Fredoka',sans-serif;font-size:2.5rem;font-weight:700;">∞</p>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.42);margin-top:6px;">기쁨의 힘 (Joy Power)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  3. ANNOUNCEMENT
+═══════════════════════════════════════════ -->
+<section class="py-8 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <div class="announce-bar">
+      <span class="announce-badge">NEW</span>
+      <p style="font-size:.88rem;color:rgba(255,255,255,.82);">
+        😊 <strong>Season 14 ON AIR</strong> — ‑ppy 핵심 어휘 100선 + happy / snappy / scrappy 완전 정복!
+        <a href="https://ppy.kr" style="color:var(--yellow);text-decoration:underline;margin-left:6px;">ppy.kr 바로가기 →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  4. SOCIAL LINKS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-lg mx-auto">
+    <h2 class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Follow ppy.kr</h2>
+    <div class="flex flex-col gap-3">
+      <a href="https://instagram.com/ppy.kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">📷</div>
+        <div><p style="font-size:.85rem;font-weight:600;">Instagram</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">@ppy.kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="https://youtube.com/@ppy.kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#ff0000;">▶</div>
+        <div><p style="font-size:.85rem;font-weight:600;">YouTube</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">@ppy.kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="https://x.com/ppy_kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#000;border:1px solid rgba(255,255,255,.15);">✕</div>
+        <div><p style="font-size:.85rem;font-weight:600;">X / Twitter</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">@ppy_kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="https://github.com/ppy-kr" class="social-btn" target="_blank" rel="noopener">
+        <div class="social-icon" style="background:#24292f;">🐙</div>
+        <div><p style="font-size:.85rem;font-weight:600;">GitHub</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">ppy-kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+      <a href="mailto:hello@ppy.kr" class="social-btn">
+        <div class="social-icon" style="background:linear-gradient(135deg,var(--yellow),var(--pink));">✉</div>
+        <div><p style="font-size:.85rem;font-weight:600;">Email</p><p style="font-size:.75rem;color:rgba(255,255,255,.38);">hello@ppy.kr</p></div>
+        <span style="margin-left:auto;font-size:.8rem;color:rgba(255,255,255,.22);">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  5. WORD EXAMPLES
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:8px;">‑ppy Words in Action</h2>
+    <p style="font-size:.83rem;color:rgba(255,255,255,.35);margin-bottom:28px;">‑ppy 파생 핵심 어휘 12선</p>
+    <div class="flex flex-wrap gap-3 justify-center">
+      <span class="word-pill">happy</span>
+      <span class="word-pill b">snappy</span>
+      <span class="word-pill c">scrappy</span>
+      <span class="word-pill">appy</span>
+      <span class="word-pill b">sappy</span>
+      <span class="word-pill c">yappy</span>
+      <span class="word-pill">chippy</span>
+      <span class="word-pill b">peppy</span>
+      <span class="word-pill c">zippy</span>
+      <span class="word-pill">nippy</span>
+      <span class="word-pill b">tippy</span>
+      <span class="word-pill c">zappy</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  6. MOOD SHOWCASE (‑ppy Transformation)
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:8px;">‑ppy Transformation</h2>
+    <p style="font-size:.83rem;color:rgba(255,255,255,.35);text-align:center;margin-bottom:28px;">어근 + ‑py (p 중복 규칙) = 생동감 넘치는 형용사</p>
+    <div class="flex flex-col gap-3">
+      <div class="transform-row">
+        <span style="color:var(--yellow);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.9rem;min-width:110px;">hap</span>
+        <span style="color:rgba(255,255,255,.22);font-size:1.2rem;">→</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">+ p + ‑y</span>
+        <span style="color:var(--pink);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.92rem;">happy</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">행복한</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--yellow);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.9rem;min-width:110px;">snap</span>
+        <span style="color:rgba(255,255,255,.22);font-size:1.2rem;">→</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">+ p + ‑y</span>
+        <span style="color:var(--pink);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.92rem;">snappy</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">활기찬·톡 쏘는</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--yellow);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.9rem;min-width:110px;">pep</span>
+        <span style="color:rgba(255,255,255,.22);font-size:1.2rem;">→</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">+ p + ‑y</span>
+        <span style="color:var(--pink);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.92rem;">peppy</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">활발한·명랑한</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--yellow);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.9rem;min-width:110px;">zip</span>
+        <span style="color:rgba(255,255,255,.22);font-size:1.2rem;">→</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">+ p + ‑y</span>
+        <span style="color:var(--pink);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.92rem;">zippy</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">경쾌한·빠른</span>
+      </div>
+      <div class="transform-row">
+        <span style="color:var(--yellow);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.9rem;min-width:110px;">scrap</span>
+        <span style="color:rgba(255,255,255,.22);font-size:1.2rem;">→</span>
+        <span style="color:rgba(255,255,255,.38);font-size:.78rem;flex:1;">+ p + ‑y</span>
+        <span style="color:var(--pink);font-family:'Fredoka',sans-serif;font-weight:700;font-size:.92rem;">scrappy</span>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.28);margin-left:8px;">투지 있는·거친</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  7. LINGUISTIC TRAITS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-sky" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:28px;">Linguistic Traits</h2>
+    <div class="glass p-6 flex flex-col gap-6">
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">형용사 형성력 (Adjective Formation)</span>
+          <span style="font-size:.85rem;color:var(--yellow);">98%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="98%" style="background:linear-gradient(90deg,var(--yellow),var(--pink));"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">구어·감정 표현 빈도 (Usage)</span>
+          <span style="font-size:.85rem;color:var(--pink);">97%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="97%" style="background:linear-gradient(90deg,var(--pink),var(--sky));"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">구어적 생산성 (Colloquial Productivity)</span>
+          <span style="font-size:.85rem;color:var(--sky);">96%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="96%" style="background:linear-gradient(90deg,var(--sky),var(--lime));"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
+          <span style="font-size:.85rem;font-weight:600;">역사적 지속성 (Historical Continuity)</span>
+          <span style="font-size:.85rem;color:var(--lime);">94%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" data-width="94%" style="background:linear-gradient(90deg,var(--lime),var(--yellow));"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  8. SUFFIX ROLES (Mood Grid)
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:28px;">‑ppy Mood Grid</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="mood-card" style="border-color:rgba(250,204,21,.25);border:1px solid rgba(250,204,21,.25);">
+        <div style="font-size:2.2rem;margin-bottom:8px;">😊</div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--yellow);margin-bottom:4px;font-size:.95rem;">긍정·기쁨</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">happy, peppy, chippy</p>
+      </div>
+      <div class="mood-card" style="border-color:rgba(244,114,182,.25);border:1px solid rgba(244,114,182,.25);">
+        <div style="font-size:2.2rem;margin-bottom:8px;">⚡</div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--pink);margin-bottom:4px;font-size:.95rem;">활기·에너지</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">snappy, zippy, zappy</p>
+      </div>
+      <div class="mood-card" style="border-color:rgba(56,189,248,.25);border:1px solid rgba(56,189,248,.25);">
+        <div style="font-size:2.2rem;margin-bottom:8px;">🥊</div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--sky);margin-bottom:4px;font-size:.95rem;">투지·거침</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">scrappy, nippy, yappy</p>
+      </div>
+      <div class="mood-card" style="border-color:rgba(163,230,53,.25);border:1px solid rgba(163,230,53,.25);">
+        <div style="font-size:2.2rem;margin-bottom:8px;">💧</div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--lime);margin-bottom:4px;font-size:.95rem;">감상·나약함</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);">sappy, tippy, drappy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  9. CODE BLOCK
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Suffix Anatomy</h2>
+    <div class="code-block">
+<span class="tk-kw">const</span> <span class="tk-fn">suffix</span> = {<br>
+&nbsp;&nbsp;<span class="tk-nm">symbol</span>:      <span class="tk-st">"‑ppy"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">baseRule</span>:    <span class="tk-st">"CVC root → double final C + ‑y"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">origin</span>:      <span class="tk-st">"Old English / Germanic ‑ig → ‑y (+ consonant doubling)"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">meaning</span>:     [<span class="tk-st">"having the quality of"</span>, <span class="tk-st">"full of"</span>, <span class="tk-st">"characterized by"</span>],<br>
+&nbsp;&nbsp;<span class="tk-nm">pos</span>:         <span class="tk-st">"adjective-forming"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">register</span>:    <span class="tk-st">"colloquial / informal / expressive"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">advForm</span>:    <span class="tk-st">"‑ppily (happily, snappily)"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">nounForm</span>:   <span class="tk-st">"‑ppiness (happiness, snappiness)"</span>,<br>
+&nbsp;&nbsp;<span class="tk-nm">words</span>:       <span class="tk-nm">800</span>,<br>
+&nbsp;&nbsp;<span class="tk-fn">form</span>:        <span class="tk-kw">root</span> =&gt; <span class="tk-kw">root</span> + <span class="tk-st">"p"</span> + <span class="tk-st">"y"</span>,<br>
+};<br>
+<span class="tk-cm">// hap + p + y = happy → happily → happiness</span><br>
+<span class="tk-cm">// snap + p + y = snappy → snappily → snappiness</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  10. ETYMOLOGY TIMELINE
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-sky" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:32px;">Etymology Timeline</h2>
+    <div class="flex gap-6">
+      <div class="flex flex-col items-center" style="padding-top:8px;">
+        <div class="tl-dot"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--pink);box-shadow:0 0 8px rgba(244,114,182,.65);"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--sky);box-shadow:0 0 8px rgba(56,189,248,.65);"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--lime);box-shadow:0 0 8px rgba(163,230,53,.65);"></div>
+        <div class="tl-line" style="flex:1;margin:4px 0;"></div>
+        <div class="tl-dot" style="border-color:var(--coral);box-shadow:0 0 8px rgba(251,113,133,.65);"></div>
+      </div>
+      <div class="flex flex-col gap-8 flex-1">
+        <div class="glass p-4" style="border-color:rgba(250,204,21,.22);">
+          <p style="font-size:.68rem;color:var(--yellow);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Proto-Germanic (~500 BC)</p>
+          <p style="font-size:.9rem;font-weight:600;">*-agaz / *-igaz</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">"~의 성질을 가진"의 게르만 형용사 접미사 원형</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(244,114,182,.22);">
+          <p style="font-size:.68rem;color:var(--pink);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Old English (~500–1100)</p>
+          <p style="font-size:.9rem;font-weight:600;">‑ig</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">haeppig(운 좋은), snæppig 등 고대 영어 형용사 형성</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(56,189,248,.22);">
+          <p style="font-size:.68rem;color:var(--sky);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Middle English (~1100–1500)</p>
+          <p style="font-size:.9rem;font-weight:600;">‑y (+ 자음 중복)</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">happy, snappy 형태 확립, 단모음 뒤 자음 중복 규칙 정착</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(163,230,53,.22);">
+          <p style="font-size:.68rem;color:var(--lime);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Early Modern English (~1500–1700)</p>
+          <p style="font-size:.9rem;font-weight:600;">‑ppy 패턴 확산</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">문학·구어 표현에서 ‑ppy 형 형용사 폭발적 증가</p>
+        </div>
+        <div class="glass p-4" style="border-color:rgba(251,113,133,.22);">
+          <p style="font-size:.68rem;color:var(--coral);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;">Modern English (18c ~ present)</p>
+          <p style="font-size:.9rem;font-weight:600;">구어·슬랭·신조어 확장</p>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.42);">yappy, zappy, zippy… 구어·팝컬처에서 활발히 신조어 생성</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  11. QUOTES
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto flex flex-col gap-6">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:8px;">Lexical Wisdom</h2>
+    <div class="glass p-6" style="border-left:3px solid var(--yellow);">
+      <p style="font-size:1rem;font-style:italic;color:rgba(255,255,255,.82);line-height:1.75;">"Happiness is not a destination — it is a suffix. Add ‑ppy to your roots and watch the world light up."</p>
+      <p style="font-size:.8rem;color:var(--yellow);margin-top:12px;font-weight:600;">— ppy.kr</p>
+    </div>
+    <div class="glass p-6" style="border-left:3px solid var(--pink);">
+      <p style="font-size:1rem;font-style:italic;color:rgba(255,255,255,.82);line-height:1.75;">"Be snappy. Stay peppy. The ‑ppy suffix is the English language's little burst of pure energy."</p>
+      <p style="font-size:.8rem;color:var(--pink);margin-top:12px;font-weight:600;">— ppy.kr 어원 노트</p>
+    </div>
+    <div class="glass p-6" style="border-left:3px solid var(--sky);">
+      <p style="font-size:1rem;font-style:italic;color:rgba(255,255,255,.82);line-height:1.75;">"‑ppy는 단순한 접미사가 아니다. hap(행운)에 ‑py를 붙이는 순간 인류 최고의 감정어 'happy'가 탄생한다."</p>
+      <p style="font-size:.8rem;color:var(--sky);margin-top:12px;font-weight:600;">— ppy.kr 철학</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  12. FEATURED VIDEO
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Featured Video</h2>
+    <div class="glass overflow-hidden" style="border-color:rgba(250,204,21,.22);">
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="‑ppy suffix lecture"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="p-4 flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <p style="font-size:.9rem;font-weight:600;">‑ppy 접미사 완전 정복 | ppy.kr</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:2px;">happy, snappy, peppy… 자음 중복 규칙과 파생어 완전 해부</p>
+        </div>
+        <div class="text-right">
+          <p style="font-size:.8rem;color:var(--yellow);">63.8K views</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.32);">11.2K likes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  13. PLAYLIST
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-sky" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Playlist</h2>
+    <div class="flex flex-col gap-4">
+      <a href="https://youtube.com/@ppy.kr" target="_blank" rel="noopener" class="glass flex gap-4 p-4 items-center" style="text-decoration:none;border-color:rgba(250,204,21,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(250,204,21,.45)'" onmouseout="this.style.borderColor='rgba(250,204,21,.15)'">
+        <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=120&h=68&fit=crop" alt="ep1" style="border-radius:8px;flex-shrink:0;width:120px;height:68px;object-fit:cover;"/>
+        <div style="flex:1;">
+          <p style="font-size:.78rem;color:var(--yellow);font-weight:700;margin-bottom:2px;">Ep.01</p>
+          <p style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88);">happy의 어원: hap(행운) + p + y 자음 중복 완전 정리</p>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;">20:44 · 44.2K views</p>
+        </div>
+        <span style="color:rgba(255,255,255,.25);font-size:1.2rem;">▶</span>
+      </a>
+      <a href="https://youtube.com/@ppy.kr" target="_blank" rel="noopener" class="glass flex gap-4 p-4 items-center" style="text-decoration:none;border-color:rgba(244,114,182,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(244,114,182,.45)'" onmouseout="this.style.borderColor='rgba(244,114,182,.15)'">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=120&h=68&fit=crop" alt="ep2" style="border-radius:8px;flex-shrink:0;width:120px;height:68px;object-fit:cover;"/>
+        <div style="flex:1;">
+          <p style="font-size:.78rem;color:var(--pink);font-weight:700;margin-bottom:2px;">Ep.02</p>
+          <p style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88);">snappy, peppy, zippy — ‑ppy 에너지 형용사 완전 분석</p>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;">23:19 · 31.5K views</p>
+        </div>
+        <span style="color:rgba(255,255,255,.25);font-size:1.2rem;">▶</span>
+      </a>
+      <a href="https://youtube.com/@ppy.kr" target="_blank" rel="noopener" class="glass flex gap-4 p-4 items-center" style="text-decoration:none;border-color:rgba(56,189,248,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(56,189,248,.45)'" onmouseout="this.style.borderColor='rgba(56,189,248,.15)'">
+        <img src="https://images.unsplash.com/photo-1546074177-ffdda98d214f?w=120&h=68&fit=crop" alt="ep3" style="border-radius:8px;flex-shrink:0;width:120px;height:68px;object-fit:cover;"/>
+        <div style="flex:1;">
+          <p style="font-size:.78rem;color:var(--sky);font-weight:700;margin-bottom:2px;">Ep.03</p>
+          <p style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88);">happiness, snappiness — ‑ppiness 3단 파생어 체계</p>
+          <p style="font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;">18:36 · 27.8K views</p>
+        </div>
+        <span style="color:rgba(255,255,255,.25);font-size:1.2rem;">▶</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  14. IMAGE CAROUSEL
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Gallery</h2>
+    <div class="glass overflow-hidden" style="border-color:rgba(250,204,21,.22);">
+      <div style="position:relative;overflow:hidden;border-radius:16px;">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=640&h=280&fit=crop" alt="s1" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--yellow);">Happy Vibes 😊</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">행복한 어원의 세계</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=640&h=280&fit=crop" alt="s2" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--pink);">Snappy & Peppy ⚡</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">활기찬 접미사의 에너지</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=640&h=280&fit=crop" alt="s3" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--sky);">Zippy Learning 🚀</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">경쾌한 어휘 학습</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=640&h=280&fit=crop" alt="s4" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--lime);">Scrappy Spirit 🥊</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">투지 있는 어원 탐구</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=640&h=280&fit=crop" alt="s5" style="width:100%;height:220px;object-fit:cover;"/>
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(2,3,9,.9));">
+              <p style="font-size:.9rem;font-weight:600;color:var(--coral);">Happiness Quest 🌟</p>
+              <p style="font-size:.73rem;color:rgba(255,255,255,.52);">‑ppiness의 어원을 찾아서</p>
+            </div>
+          </div>
+        </div>
+        <button onclick="carouselMove(-1)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;">‹</button>
+        <button onclick="carouselMove(1)"  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;">›</button>
+      </div>
+      <div class="flex justify-center gap-2 p-4" id="carouselDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  15. SPOTLIGHT
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <div style="position:relative;border-radius:20px;overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=640&h=240&fit=crop" alt="spotlight" style="width:100%;height:200px;object-fit:cover;"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(250,204,21,.6),rgba(244,114,182,.48));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;">
+        <p style="font-family:'Fredoka',sans-serif;font-size:clamp(1.1rem,4vw,1.8rem);font-weight:700;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45);">Happy. Snappy. Peppy. Zippy. 😊</p>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.85);margin-top:8px;">‑ppy 하나로 완성되는 영어 감정 형용사</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  16. MUSIC PLAYER
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">ppy.kr Soundtrack</h2>
+    <div class="glass p-6" style="border-color:rgba(250,204,21,.22);">
+      <div class="flex items-center gap-5 mb-5">
+        <div class="vinyl" id="vinyl"></div>
+        <div style="flex:1;">
+          <p style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:1rem;color:var(--yellow);" id="trackTitle">Happy Day</p>
+          <p style="font-size:.78rem;color:rgba(255,255,255,.35);" id="trackArtist">ppy.kr Beats</p>
+          <div style="margin-top:10px;">
+            <div class="flex justify-between mb-1" style="font-size:.73rem;color:rgba(255,255,255,.25);">
+              <span id="timeNow">0:00</span><span id="timeTot">3:28</span>
+            </div>
+            <div class="music-prog-track" id="musicTrack" onclick="seekMusic(event)">
+              <div class="music-prog-fill" id="musicFill" style="width:0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-6 mb-6">
+        <button onclick="musicPrev()" style="background:none;border:none;color:rgba(255,255,255,.42);font-size:1.4rem;cursor:pointer;" title="prev">⏮</button>
+        <button onclick="musicToggle()" id="playBtn" style="background:linear-gradient(135deg,var(--yellow),var(--pink));border:none;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.1rem;color:#1a1200;display:flex;align-items:center;justify-content:center;">▶</button>
+        <button onclick="musicNext()" style="background:none;border:none;color:rgba(255,255,255,.42);font-size:1.4rem;cursor:pointer;" title="next">⏭</button>
+      </div>
+      <div class="flex flex-col gap-2" id="trackList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  17. PROJECTS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:28px;">Projects</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">📖</span>
+          <span class="status-badge" style="background:rgba(250,204,21,.15);color:var(--yellow);border:1px solid rgba(250,204,21,.3);">LIVE</span>
+        </div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--yellow);margin-bottom:4px;">‑ppy Dictionary</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">800+ ‑ppy 어휘 데이터베이스</p>
+      </div>
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">😊</span>
+          <span class="status-badge" style="background:rgba(244,114,182,.15);color:var(--pink);border:1px solid rgba(244,114,182,.3);">BETA</span>
+        </div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--pink);margin-bottom:4px;">Joy Lab</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">‑ppy 감정 어원 분석 도구</p>
+      </div>
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">🎮</span>
+          <span class="status-badge" style="background:rgba(56,189,248,.15);color:var(--sky);border:1px solid rgba(56,189,248,.3);">DEV</span>
+        </div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--sky);margin-bottom:4px;">‑ppy Quest</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">게임형 감정 어원 학습 앱</p>
+      </div>
+      <div class="project-card">
+        <div class="flex items-center justify-between mb-3">
+          <span style="font-size:1.5rem;">🤖</span>
+          <span class="status-badge" style="background:rgba(163,230,53,.15);color:var(--lime);border:1px solid rgba(163,230,53,.3);">SOON</span>
+        </div>
+        <p style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--lime);margin-bottom:4px;">‑ppy AI Tutor</p>
+        <p style="font-size:.77rem;color:rgba(255,255,255,.42);">AI 기반 개인화 어원 튜터</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  18. RECENT POSTS
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-sky" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Recent Posts</h2>
+    <div class="flex flex-col gap-4">
+      <div class="glass p-5" style="border-color:rgba(250,204,21,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(250,204,21,.45)'" onmouseout="this.style.borderColor='rgba(250,204,21,.15)'">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span style="font-size:.68rem;color:var(--yellow);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Etymology</span>
+            <p style="font-weight:600;margin-top:4px;font-size:.93rem;">happy의 어원: 행운(hap)이 어떻게 행복(happy)이 됐나?</p>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:4px;">Old Norse happ → 중세 영어 happe → happy 2,000년 여정</p>
+          </div>
+          <span style="font-size:.73rem;color:rgba(255,255,255,.25);white-space:nowrap;flex-shrink:0;">2025.12.30</span>
+        </div>
+      </div>
+      <div class="glass p-5" style="border-color:rgba(244,114,182,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(244,114,182,.45)'" onmouseout="this.style.borderColor='rgba(244,114,182,.15)'">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span style="font-size:.68rem;color:var(--pink);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Spelling Rule</span>
+            <p style="font-weight:600;margin-top:4px;font-size:.93rem;">‑py에서 ‑ppy로: 단모음 뒤 자음 중복 규칙 완전 정리</p>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:4px;">snap→snappy, zip→zippy 패턴 해부와 예외 단어들</p>
+          </div>
+          <span style="font-size:.73rem;color:rgba(255,255,255,.25);white-space:nowrap;flex-shrink:0;">2025.12.16</span>
+        </div>
+      </div>
+      <div class="glass p-5" style="border-color:rgba(56,189,248,.15);transition:all .25s;" onmouseover="this.style.borderColor='rgba(56,189,248,.45)'" onmouseout="this.style.borderColor='rgba(56,189,248,.15)'">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span style="font-size:.68rem;color:var(--sky);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Word Family</span>
+            <p style="font-weight:600;margin-top:4px;font-size:.93rem;">happy → happily → happiness: ‑ppy 3단 파생어 완전 해부</p>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:4px;">‑ppy → ‑ppily → ‑ppiness 파생 체계 분석</p>
+          </div>
+          <span style="font-size:.73rem;color:rgba(255,255,255,.25);white-space:nowrap;flex-shrink:0;">2025.12.03</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  19. FAQ
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">FAQ</h2>
+    <div class="flex flex-col gap-3">
+      <div class="glass overflow-hidden" style="border-color:rgba(250,204,21,.15);">
+        <button onclick="toggleAcc('acc1','arr1')" class="w-full flex items-center justify-between p-5 text-left" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.88);">
+          <span style="font-size:.88rem;font-weight:600;">‑ppy 접미사는 무엇인가요?</span>
+          <span class="acc-arrow" id="arr1" style="font-size:1rem;color:var(--yellow);">▼</span>
+        </button>
+        <div class="acc-body" id="acc1" style="padding:0 20px;">
+          <p style="font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;padding-bottom:16px;">‑ppy는 단모음으로 끝나는 어근에 ‑y 접미사를 붙일 때 마지막 자음 p가 중복되어 만들어지는 형용사 접미사입니다. 고대 영어 ‑ig에서 유래하여 "~한 상태인, ~의 성질을 가진" 의미를 만들며, happy, snappy, peppy, zippy 등 약 800개 이상의 감정·성질 형용사를 형성합니다.</p>
+        </div>
+      </div>
+      <div class="glass overflow-hidden" style="border-color:rgba(244,114,182,.15);">
+        <button onclick="toggleAcc('acc2','arr2')" class="w-full flex items-center justify-between p-5 text-left" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.88);">
+          <span style="font-size:.88rem;font-weight:600;">왜 happy는 'hapy'가 아니라 'happy'인가요?</span>
+          <span class="acc-arrow" id="arr2" style="font-size:1rem;color:var(--pink);">▼</span>
+        </button>
+        <div class="acc-body" id="acc2" style="padding:0 20px;">
+          <p style="font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;padding-bottom:16px;">영어 철자법의 "단모음 + 단자음" 규칙 때문입니다. 어근 'hap'의 모음 'a'가 단모음이므로, ‑y를 붙일 때 마지막 자음 'p'를 중복합니다(hap + p + y = happy). 이는 snap→snappy, zip→zippy 등에도 동일하게 적용됩니다. 단모음을 보호하고 발음을 유지하기 위한 철자 규칙입니다.</p>
+        </div>
+      </div>
+      <div class="glass overflow-hidden" style="border-color:rgba(56,189,248,.15);">
+        <button onclick="toggleAcc('acc3','arr3')" class="w-full flex items-center justify-between p-5 text-left" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.88);">
+          <span style="font-size:.88rem;font-weight:600;">ppy.kr 에서는 어떤 콘텐츠를 제공하나요?</span>
+          <span class="acc-arrow" id="arr3" style="font-size:1rem;color:var(--sky);">▼</span>
+        </button>
+        <div class="acc-body" id="acc3" style="padding:0 20px;">
+          <p style="font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;padding-bottom:16px;">ppy.kr는 ‑ppy 접미사의 어원 해설, 파생어 목록(800+), 유튜브 강의, 자음 중복 철자 규칙 가이드, ‑ppy → ‑ppily → ‑ppiness 파생 체계, 인터랙티브 학습 도구를 제공합니다. happy에서 scrappy까지, 감정·성질 형용사 ‑ppy의 모든 측면을 재미있게 탐구합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  20. NEWSLETTER
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-lg mx-auto text-center">
+    <h2 class="neon-pink" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:8px;">Newsletter</h2>
+    <p style="font-size:.83rem;color:rgba(255,255,255,.38);margin-bottom:24px;">매주 ‑ppy 핵심 어휘 5선을 이메일로 받아보세요 😊</p>
+    <div class="glass p-6" style="border-color:rgba(250,204,21,.22);">
+      <div class="flex gap-3 mb-3">
+        <input type="email" id="nlEmail" placeholder="your@email.com" class="form-input" style="flex:1;"/>
+        <button onclick="submitNewsletter()" style="padding:12px 20px;background:linear-gradient(135deg,var(--yellow),var(--pink));border:none;border-radius:10px;color:#1a1200;font-weight:700;cursor:pointer;white-space:nowrap;font-size:.83rem;">구독하기</button>
+      </div>
+      <p id="nlMsg" style="font-size:.78rem;min-height:20px;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  21. CONTACT + FOOTER
+═══════════════════════════════════════════ -->
+<section class="py-16 px-4 reveal">
+  <div class="max-w-lg mx-auto">
+    <h2 class="neon-sky" style="font-family:'Fredoka',sans-serif;font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:24px;">Contact</h2>
+    <div class="glass p-6" style="border-color:rgba(56,189,248,.2);">
+      <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">이름 *</label>
+            <input type="text" id="ctName" placeholder="홍길동" class="form-input"/>
+          </div>
+          <div>
+            <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">이메일 *</label>
+            <input type="email" id="ctEmail" placeholder="your@email.com" class="form-input"/>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">주제</label>
+          <input type="text" id="ctTopic" placeholder="‑ppy 어원 문의, 협업 제안 등" class="form-input"/>
+        </div>
+        <div>
+          <label style="font-size:.73rem;color:rgba(255,255,255,.35);display:block;margin-bottom:6px;">메시지 *</label>
+          <textarea id="ctMsg" placeholder="궁금한 점이나 제안사항을 자유롭게 작성해 주세요." class="form-input" rows="4" style="resize:vertical;"></textarea>
+        </div>
+        <button onclick="submitContact()" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--sky),var(--pink));border:none;border-radius:10px;color:#fff;font-weight:700;cursor:pointer;font-size:.88rem;">메시지 보내기 😊</button>
+        <p id="ctConfirm" style="font-size:.78rem;text-align:center;min-height:20px;"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 px-4 text-center" style="border-top:1px solid rgba(255,255,255,.06);">
+  <div class="max-w-2xl mx-auto">
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(250,204,21,.09);border:1px solid rgba(250,204,21,.2);color:var(--yellow);">#suffix</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(244,114,182,.09);border:1px solid rgba(244,114,182,.2);color:var(--pink);">#‑ppy</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(56,189,248,.09);border:1px solid rgba(56,189,248,.2);color:var(--sky);">#happy</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(163,230,53,.09);border:1px solid rgba(163,230,53,.2);color:var(--lime);">#영단어</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(251,113,133,.09);border:1px solid rgba(251,113,133,.2);color:var(--coral);">#어원</span>
+      <span style="padding:4px 12px;border-radius:999px;font-size:.73rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.48);">#OldEnglish</span>
+    </div>
+    <h3 class="neon-yellow" style="font-family:'Fredoka',sans-serif;font-size:2.2rem;font-weight:700;margin-bottom:4px;">ppy.kr 😊</h3>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.35);margin-bottom:4px;">Happy · Snappy · Peppy · Zippy · Scrappy</p>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.2);margin-bottom:16px;">‑ppy 접미사의 모든 것 — 어원, 감정, 기쁨의 언어</p>
+    <a href="https://ppy.kr" style="color:var(--yellow);text-decoration:none;font-size:.85rem;font-weight:600;" target="_blank" rel="noopener">https://ppy.kr</a>
+    <p style="font-size:.73rem;color:rgba(255,255,255,.16);margin-top:16px;">© 2025 ppy.kr. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ─── Particles ─── */
+(function(){
+  const cvs=document.getElementById('particles'),ctx=cvs.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=cvs.width=innerWidth;H=cvs.height=innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const cols=['rgba(250,204,21,','rgba(244,114,182,','rgba(56,189,248,','rgba(163,230,53,','rgba(251,113,133,'];
+  for(let i=0;i<72;i++) pts.push({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*.48, vy:(Math.random()-.5)*.48,
+    r:Math.random()*2.2+.5,
+    c:cols[Math.floor(Math.random()*cols.length)],
+    a:Math.random()*.45+.1
+  });
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c+p.a+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ─── Joy meter (20/20 MAX) ─── */
+(function(){
+  const el=document.getElementById('joyMeter');
+  for(let i=0;i<20;i++){
+    const d=document.createElement('div');
+    d.className='joy-seg lit';
+    el.appendChild(d);
+  }
+})();
+
+/* ─── Count up ─── */
+function countUp(id,target,suffix,duration){
+  const el=document.getElementById(id);if(!el)return;
+  let start=0,step=target/60,interval=duration/60;
+  const t=setInterval(()=>{
+    start=Math.min(start+step,target);
+    el.textContent=Math.floor(start).toLocaleString()+suffix;
+    if(start>=target)clearInterval(t);
+  },interval);
+}
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ countUp('kpi1',800,'+',1800); countUp('kpi2',1500,'년',1800); },400);
+});
+
+/* ─── Scroll reveal + progress bars ─── */
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.prog-fill').forEach(f=>{
+        setTimeout(()=>{ f.style.width=f.dataset.width; },200);
+      });
+    }
+  });
+},{threshold:.15});
+reveals.forEach(r=>io.observe(r));
+
+/* ─── Accordion ─── */
+function toggleAcc(id,arrowId){
+  const body=document.getElementById(id),arrow=document.getElementById(arrowId);
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.acc-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.acc-arrow').forEach(a=>a.classList.remove('open'));
+  if(!isOpen){body.classList.add('open');arrow.classList.add('open');}
+}
+
+/* ─── Carousel ─── */
+let carIdx=0;const carTotal=5;
+function carouselMove(dir){
+  carIdx=(carIdx+dir+carTotal)%carTotal;
+  document.getElementById('carouselTrack').style.transform=`translateX(-${carIdx*100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));
+}
+(function(){
+  const dc=document.getElementById('carouselDots');
+  for(let i=0;i<carTotal;i++){
+    const d=document.createElement('button');
+    d.className='carousel-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','slide '+(i+1));
+    d.onclick=()=>{
+      carIdx=i;
+      document.getElementById('carouselTrack').style.transform=`translateX(-${i*100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((dd,ii)=>dd.classList.toggle('active',ii===i));
+    };
+    dc.appendChild(d);
+  }
+  setInterval(()=>carouselMove(1),5200);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft')carouselMove(-1);
+    if(e.key==='ArrowRight')carouselMove(1);
+  });
+  let tsx=0;const tr=document.getElementById('carouselTrack');
+  tr.addEventListener('touchstart',e=>tsx=e.touches[0].clientX,{passive:true});
+  tr.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tsx;if(Math.abs(dx)>40)carouselMove(dx<0?1:-1);});
+})();
+
+/* ─── Music player ─── */
+const tracks=[
+  {title:'Happy Day',        artist:'ppy.kr Beats',  dur:208},
+  {title:'Snappy Sunrise',   artist:'ppy.kr Studio', dur:247},
+  {title:'Peppy Forever',    artist:'ppy.kr Sound',  dur:231}
+];
+let mTrack=0,mTime=0,mPlaying=false,mTimer=null;
+function fmt(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;}
+function renderTrackList(){
+  const tl=document.getElementById('trackList');tl.innerHTML='';
+  tracks.forEach((t,i)=>{
+    const div=document.createElement('div');
+    div.style.cssText=`display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background .2s;background:${i===mTrack?'rgba(250,204,21,.09)':'transparent'};border:1px solid ${i===mTrack?'rgba(250,204,21,.3)':'transparent'};`;
+    div.innerHTML=`<span style="width:20px;text-align:center;font-size:.85rem;color:${i===mTrack?'var(--yellow)':'rgba(255,255,255,.28)'};">${i===mTrack&&mPlaying?'♪':(i+1)}</span><div style="flex:1;"><p style="font-size:.85rem;font-weight:600;color:${i===mTrack?'var(--yellow)':'rgba(255,255,255,.78)'};">${t.title}</p><p style="font-size:.73rem;color:rgba(255,255,255,.32);">${t.artist}</p></div><span style="font-size:.78rem;color:rgba(255,255,255,.28);">${fmt(t.dur)}</span>`;
+    div.onclick=()=>{mTrack=i;mTime=0;mPlaying=true;updateMusic();startMusicTimer();};
+    tl.appendChild(div);
+  });
+}
+function updateMusic(){
+  const t=tracks[mTrack];
+  document.getElementById('trackTitle').textContent=t.title;
+  document.getElementById('trackArtist').textContent=t.artist;
+  document.getElementById('timeTot').textContent=fmt(t.dur);
+  document.getElementById('timeNow').textContent=fmt(mTime);
+  document.getElementById('musicFill').style.width=(mTime/t.dur*100)+'%';
+  document.getElementById('playBtn').textContent=mPlaying?'⏸':'▶';
+  const vinyl=document.getElementById('vinyl');
+  mPlaying?vinyl.classList.add('spinning'):vinyl.classList.remove('spinning');
+  renderTrackList();
+}
+function startMusicTimer(){
+  clearInterval(mTimer);if(!mPlaying)return;
+  mTimer=setInterval(()=>{
+    mTime++;
+    if(mTime>=tracks[mTrack].dur){mTime=0;mTrack=(mTrack+1)%tracks.length;}
+    updateMusic();
+  },1000);
+}
+function musicToggle(){mPlaying=!mPlaying;updateMusic();startMusicTimer();}
+function musicPrev(){mTrack=(mTrack-1+tracks.length)%tracks.length;mTime=0;updateMusic();if(mPlaying)startMusicTimer();}
+function musicNext(){mTrack=(mTrack+1)%tracks.length;mTime=0;updateMusic();if(mPlaying)startMusicTimer();}
+function seekMusic(e){
+  const rect=e.currentTarget.getBoundingClientRect();
+  mTime=Math.floor((e.clientX-rect.left)/rect.width*tracks[mTrack].dur);
+  updateMusic();
+}
+updateMusic();
+
+/* ─── Newsletter ─── */
+function submitNewsletter(){
+  const email=document.getElementById('nlEmail').value.trim();
+  const msg=document.getElementById('nlMsg');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.style.color='#fb7185';msg.textContent='올바른 이메일 주소를 입력해 주세요.';return;
+  }
+  msg.style.color='#a3e635';
+  msg.textContent='✓ 구독 완료! 매주 ‑ppy 핵심 어휘를 행복하게 보내드릴게요 😊';
+  document.getElementById('nlEmail').value='';
+}
+
+/* ─── Contact ─── */
+function submitContact(){
+  const name=document.getElementById('ctName').value.trim();
+  const email=document.getElementById('ctEmail').value.trim();
+  const msg=document.getElementById('ctMsg').value.trim();
+  const conf=document.getElementById('ctConfirm');
+  if(!name||!email||!msg){conf.style.color='#fb7185';conf.textContent='이름, 이메일, 메시지를 모두 입력해 주세요.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){conf.style.color='#fb7185';conf.textContent='올바른 이메일 주소를 입력해 주세요.';return;}
+  conf.style.color='#a3e635';
+  conf.textContent='✓ 메시지가 전송되었습니다. 빠른 시일 내에 답변 드릴게요 😊';
+  ['ctName','ctEmail','ctTopic'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ctMsg').value='';
+}
+
+/* ─── Scroll to top ─── */
+const stb=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{ stb.style.display=scrollY>400?'flex':'none'; });
+</script>
+</body>
+</html>
